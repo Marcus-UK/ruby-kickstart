@@ -5,4 +5,12 @@
 # add_more_ruby("Sad times are ahead!")         # => "Happy times are ahead!"
 
 def add_more_ruby(string)
+    string.gsub(/sad/, "happy").gsub(/Sad/, "Happy")
 end
+
+=begin
+1. in string, replace all instances of sad with happy.
+2. Use .gsub method.
+3. downcase answers.
+=end
+
