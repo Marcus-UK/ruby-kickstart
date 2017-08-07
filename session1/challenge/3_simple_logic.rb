@@ -8,5 +8,12 @@
 # ten_twenty(6) # => 10
 
 def ten_twenty(n)
-  # your code goes here
+  n % 2 == 0 ? 10 : 20
 end
+
+=begin
+1. Establish whether number is odd or even:
+    n % 2 == 0 (even)
+2. Return 10 if even. Else Return 20.
+=end
+
