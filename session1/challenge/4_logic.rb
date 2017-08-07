@@ -10,4 +10,26 @@
 # grade(15, true)   # => "B"
 
 def grade(num_books, reads_books)
-end
+    if reads_books
+        return "A" if num_books > 20
+        return "B" if num_books >= 10
+        return "C" if num_books < 10
+    else
+        return "B" if num_books > 20
+        return "C" if num_books >= 10
+        return "D" if num_books < 10
+    end
+ end
+
+=begin
+1. establish whether someone has read books.
+2. if read_books == true:
+        num_books > 20  => "A"
+        num_books >= 10  => "B"
+        num books < 10 => "C"
+    else
+        num_books > 20 => "B"
+        num_books >= 1o => "C"
+        num_books < 10=> "D"
+    end
+=end
