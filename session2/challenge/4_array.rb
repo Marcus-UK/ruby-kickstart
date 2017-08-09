@@ -7,3 +7,14 @@
 # get_squares [25, 4, 9, 6, 50, 16, 5] # => [4, 5]
 
 # This time you will have to define the method, it's called: get_squares
+
+def get_squares(numbers)
+    numbers.select {|x| numbers.include? x*x}.sort
+end
+
+=begin
+1. define method with argument (numbers)
+2. Use select method on numbers to return only values that evaluate as true.
+3. Block. numbers.include? x*x.
+4. Use .sort method to put results in order.
+=end
