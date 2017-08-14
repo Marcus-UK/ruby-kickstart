@@ -30,29 +30,59 @@ class HTMLTag
     :sans_serif => '"Arial", "Verdana"',
     :monospace  => '"Courier New", "Lucida Console"'
   }
+  
+  COLORS = {
+    :red   => '#FF0000',
+    :green => '#00FF00',
+    :blue  => '#0000FF',
+  }
 
-  attr_accessor :name, :innerHTML, :options
-
+  attr_accessor :name, :innerHTML, :font, :color, :multiline
+=begin
   # options: :multiline should be true or false
   def initialize(name, innerHTML, options)
     @name, @innerHTML, @options = name, innerHTML, options
   end
-
+=end
+  def initialize(name, innerHTML, options=Hash.new)
+    @name, @innerHTML = name, innerHTML
+    self.font      = FONTS[options[:font]]
+    self.color     = COLORS[options[:color]]
+    self.multiline = options.fetch :multiline, false
+  end
+=begin
   def font
     font = options[:font]  #  one of :serif, :sans_serif, or :monospace
     FONTS[font]
   end
-
+=end
   def style
-    return nil unless options[:font]
+    return nil unless font || color
+    to_return = "style='"
+    to_return << "font-family:#{font};" if font
+    to_return << "color:#{color};"      if color
+    to_return << "'"
+    to_return
+  end
+=begin
+  def style
+    return nil unless options[:font, :color]
     "style='font-family:#{font}'"
   end
-
+=end
+=begin
   def to_s
     line_end = if options[:multiline] then "\n" else "" end
     "<#{name} #{style}>#{line_end}"  \
     "#{innerHTML.chomp}#{line_end}"  \
     "</#{name}>\n"
   end
-
+=end
+  def to_s
+    line_end = ""
+    line_end = "\n" if multiline # remember, if options[:multiline] doesn't exist, it will return nil, and nil is false
+    "<#{name} #{style}>#{line_end}"   \
+      "#{innerHTML.chomp}#{line_end}" \
+    "</#{name}>\n"
+  end
 end
